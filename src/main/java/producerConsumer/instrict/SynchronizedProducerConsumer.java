@@ -3,33 +3,31 @@ package producerConsumer.instrict;
 import producerConsumer.ProducereConsumer;
 
 public class SynchronizedProducerConsumer implements ProducereConsumer {
-    private volatile int cnt = 0;
-    private static final int size = 10;
+    private static final int bufferSize = 10;
     private int[] buffer;
     private int consumerIndex, producerIndex;
 
     public SynchronizedProducerConsumer() {
-        buffer = new int[size];
+        buffer = new int[bufferSize];
         producerIndex = consumerIndex = 0;
     }
 
     @Override
-    public synchronized void produce() throws InterruptedException {
-        if (producerIndex - consumerIndex >= size)
+    public synchronized void produce(int value) throws InterruptedException {
+        if (producerIndex - consumerIndex >= bufferSize)
             wait();
-        buffer[producerIndex % size] = cnt;
-        System.out.println("produced " + cnt);
+        buffer[producerIndex % bufferSize] = value;
         producerIndex++;
-        cnt++;
         notifyAll();
     }
 
     @Override
-    public synchronized void consume() throws InterruptedException {
+    public synchronized int consume() throws InterruptedException {
         if (consumerIndex >= producerIndex)
             wait();
-        System.out.println("Consumed " + buffer[consumerIndex % size]);
+        int value = buffer[consumerIndex % bufferSize];
         consumerIndex++;
         notifyAll();
+        return value;
     }
 }

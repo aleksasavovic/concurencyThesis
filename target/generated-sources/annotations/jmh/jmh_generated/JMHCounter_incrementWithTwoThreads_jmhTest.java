@@ -431,10 +431,6 @@ public final class JMHCounter_incrementWithTwoThreads_jmhTest {
                 return val;
             }
             val = new JMHCounter_jmhType();
-            Field f;
-            f = jmh.JMHCounter.class.getDeclaredField("synchronizationType");
-            f.setAccessible(true);
-            f.set(val, control.getParam("synchronizationType"));
             val.setup();
             val.readyTrial = true;
             f_jmhcounter0_G = val;

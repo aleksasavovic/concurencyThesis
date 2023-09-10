@@ -1,4 +1,4 @@
-package producerConsumer.concurentDataStructures;
+/*package producerConsumer.concurentDataStructures;
 
 import producerConsumer.ProducereConsumer;
 
@@ -25,3 +25,4 @@ public class BlockingProducerConsumer implements ProducereConsumer {
         queue.take();
     }
 }
+*/

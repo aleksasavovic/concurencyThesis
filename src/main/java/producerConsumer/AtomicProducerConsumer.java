@@ -3,45 +3,51 @@ package producerConsumer;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class AtomicProducerConsumer implements ProducereConsumer {
-    private final int bufferSize = 10;
-    private final AtomicInteger producerIndex = new AtomicInteger(0);
-    private final AtomicInteger consumerIndex = new AtomicInteger(0);
-    private final AtomicInteger counter = new AtomicInteger(0);
-    private final int[] buffer = new int[bufferSize];
+    private final int bufferSize;
+    private final AtomicInteger producerIndex;
+    private final AtomicInteger consumerIndex;
+    private final AtomicInteger counter;
+    private final int[] buffer;
+
+    public AtomicProducerConsumer() {
+        this.bufferSize = 10;
+        this.producerIndex = new AtomicInteger(0);
+        this.consumerIndex = new AtomicInteger(0);
+        this.counter = new AtomicInteger(0);
+        this.buffer = new int[bufferSize];
+    }
 
     @Override
-    public void produce() throws InterruptedException {
+    public void produce(int value) throws InterruptedException {
         while (true) {
             int currentProducerIndex = producerIndex.get();
             int currentConsumerIndex = consumerIndex.get();
-
             if ((currentProducerIndex - currentConsumerIndex) >= bufferSize) {
-                continue; // Busy wait
+                continue;
             }
-
             if (producerIndex.compareAndSet(currentProducerIndex, currentProducerIndex + 1)) {
                 int index = currentProducerIndex % bufferSize;
-                int item = counter.getAndIncrement();
-                buffer[index] = item;
+                buffer[index] = value;
                 break;
             }
         }
     }
 
     @Override
-    public void consume() throws InterruptedException {
+    public int consume() throws InterruptedException {
+        int value;
         while (true) {
             int currentConsumerIndex = consumerIndex.get();
             int currentProducerIndex = producerIndex.get();
-
             if (currentConsumerIndex >= currentProducerIndex) {
-                continue; // Busy wait
+                continue;
             }
             if (consumerIndex.compareAndSet(currentConsumerIndex, currentConsumerIndex + 1)) {
                 int index = currentConsumerIndex % bufferSize;
-                int item = buffer[index];
+                value = buffer[index];
                 break;
             }
         }
+        return value;
     }
 }

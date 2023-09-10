@@ -1,7 +1,7 @@
 package producerConsumer;
 
 public interface ProducereConsumer {
-    public void produce() throws InterruptedException;
+    public void produce(int value) throws InterruptedException;
 
-    public void consume() throws InterruptedException;
+    public int consume() throws InterruptedException;
 }

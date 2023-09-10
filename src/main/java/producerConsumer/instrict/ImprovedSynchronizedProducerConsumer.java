@@ -1,4 +1,4 @@
-package producerConsumer.instrict;
+/*package producerConsumer.instrict;
 
 import producerConsumer.ProducereConsumer;
 
@@ -24,7 +24,6 @@ public class ImprovedSynchronizedProducerConsumer implements ProducereConsumer {
                 producerLock.wait();
             }
             buffer[producerIndex % size] = cnt;
-            System.out.println("Produced " + cnt);
             producerIndex++;
             cnt++;
             notifyConsumer = true;
@@ -43,7 +42,6 @@ public class ImprovedSynchronizedProducerConsumer implements ProducereConsumer {
             while (consumerIndex >= producerIndex) {
                 consumerLock.wait();
             }
-            System.out.println("Consumed " + buffer[consumerIndex % size]);
             consumerIndex++;
             notifyProducer = true;
         }
@@ -55,3 +53,4 @@ public class ImprovedSynchronizedProducerConsumer implements ProducereConsumer {
         }
     }
 }
+*/
