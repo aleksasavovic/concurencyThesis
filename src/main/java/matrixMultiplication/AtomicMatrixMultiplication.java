@@ -16,18 +16,30 @@ public class AtomicMatrixMultiplication implements MatrixMultiplication {
         }
     }
 
-    @Override
+    //@Override
     public void multiply(int[][] matrixA, int[][] matrixB, int startColumn, int endColumn) {
         for (int j = startColumn; j < endColumn; j++) {
             for (int i = 0; i < size; i++) {
                 for (int k = 0; k < size; k++) {
+                    int valueToAdd = matrixA[k][j] * matrixB[j][i];
                     while (true) {
                         int oldValue = resultMatrix[k][i].get();
-                        int newValue = oldValue + matrixA[k][j] * matrixB[j][i];
+                        int newValue = oldValue +valueToAdd;
                         if (resultMatrix[k][i].compareAndSet(oldValue, newValue)) {
                             break;
                         }
                     }
+                }
+            }
+        }
+    }
+    public void multiply2(int[][] matrixA, int[][] matrixB, int startColumn, int endColumn) {
+        for (int j = startColumn; j < endColumn; j++) {
+            for (int i = 0; i < size; i++) {
+                for (int k = 0; k < size; k++) {
+                    int valueToAdd = matrixA[k][j] * matrixB[j][i];
+                    resultMatrix[k][i].addAndGet(valueToAdd);
+
                 }
             }
         }

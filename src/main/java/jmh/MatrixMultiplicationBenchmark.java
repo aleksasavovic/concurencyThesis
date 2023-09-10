@@ -8,6 +8,7 @@ import matrixMultiplication.lockPerfield.SynchronizedLockPerFieldMatrixMultiplic
 import matrixMultiplication.optimized.ReentrantLockOptimizedMatrixMultiplication;
 import matrixMultiplication.optimized.SynchronizedOptimizedMatrixMultiplication;
 import org.openjdk.jmh.annotations.*;
+import org.openjdk.jmh.infra.Blackhole;
 import org.openjdk.jmh.runner.Runner;
 import org.openjdk.jmh.runner.RunnerException;
 import org.openjdk.jmh.runner.options.Options;
@@ -21,7 +22,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
-@State(Scope.Thread)
+@State(Scope.Benchmark)
 public class MatrixMultiplicationBenchmark {
     @Param({"500"})
     int matrixSize;
@@ -65,9 +66,9 @@ public class MatrixMultiplicationBenchmark {
 
             executorService.submit(multiplier);
         }
-
         executorService.shutdown();
         executorService.awaitTermination(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
+        System.out.println(matrixMultiplication.checkAuthenticity(matrixA,matrixB));
     }
 
     public static void main(String[] args) throws RunnerException {

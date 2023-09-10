@@ -9,10 +9,10 @@ public class Main {
     public static void main(String[] args) throws InterruptedException {
 
         int numberOfThreads = 12;
-        int numTestRuns = 5; // Number of times to run the test
+        int numTestRuns = 10; // Number of times to run the test
         long totalAverageTime = 0L;
-        //Counter counter = new AtomicCounter();
-        Counter counter = new SynchronizedCounter();
+        Counter counter = new AtomicCounter();
+        //Counter counter = new SynchronizedCounter();
         //Counter counter = new SemaphoreCounter();
         //Counter counter = new ReentrantLockCounter();
         long totalTime = 0L;

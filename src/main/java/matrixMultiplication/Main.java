@@ -18,8 +18,8 @@ public class Main {
         //MatrixMultiplication matrixMultiplication = new SynchronizedLockPerFieldMatrixMultiplication(matrixSize);
         //MatrixMultiplication matrixMultiplication = new ReentrantLockPerFieldMatrixMultiplication(matrixSize);
         //MatrixMultiplication matrixMultiplication = new SynchronizedOptimizedMatrixMultiplication(matrixSize);
-        MatrixMultiplication matrixMultiplication = new ReentrantLockOptimizedMatrixMultiplication(matrixSize);
-        //MatrixMultiplication matrixMultiplication = new AtomicMatrixMultiplication(matrixSize);
+        //MatrixMultiplication matrixMultiplication = new ReentrantLockOptimizedMatrixMultiplication(matrixSize);
+        MatrixMultiplication matrixMultiplication = new AtomicMatrixMultiplication(matrixSize);
 
         int[][] matrixA, matrixB;
         matrixA = createRandomMatrix(matrixSize, matrixSize);
@@ -42,9 +42,11 @@ public class Main {
         }
         executorService.shutdown();
         executorService.awaitTermination(Long.MAX_VALUE, java.util.concurrent.TimeUnit.NANOSECONDS);
-        long endTime = System.currentTimeMillis();
-        System.out.println(endTime - startTime);
 
+        long endTime = System.currentTimeMillis();
+
+        System.out.println(endTime - startTime);
+        matrixMultiplication.checkAuthenticity(matrixA,matrixB);
         System.out.println(matrixMultiplication.checkAuthenticity(matrixA,matrixB));
 
     }
