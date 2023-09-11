@@ -46,8 +46,7 @@ public class Main {
         long endTime = System.currentTimeMillis();
 
         System.out.println(endTime - startTime);
-        matrixMultiplication.checkAuthenticity(matrixA,matrixB);
-        System.out.println(matrixMultiplication.checkAuthenticity(matrixA,matrixB));
+
 
     }
 

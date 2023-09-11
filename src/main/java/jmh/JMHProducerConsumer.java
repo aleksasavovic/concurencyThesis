@@ -13,176 +13,80 @@ import producerConsumer.SemaphoreProducerConsumer;
 import producerConsumer.instrict.SynchronizedProducerConsumer;
 
 import java.util.Random;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @State(Scope.Benchmark)
 @BenchmarkMode(Mode.Throughput)
 @OutputTimeUnit(TimeUnit.MILLISECONDS)
 public class JMHProducerConsumer {
     private ProducereConsumer producerConsumer;
-    private static final int MIN = 1;
-    private static final int max = 10000;
+    private static final int THREAD_COUNT = 10; // Adjust as needed
+    private static final int ITERATIONS = 10000; // Adjust as needed
     private Random random;
+    private ExecutorService executorService;
+    CountDownLatch latch;
 
     @Setup
     public void setup() {
-        producerConsumer = new AtomicProducerConsumer();
+        executorService = Executors.newFixedThreadPool(THREAD_COUNT);
         random = new Random();
+        latch = new CountDownLatch(THREAD_COUNT);
+        producerConsumer = new AtomicProducerConsumer();
     }
 
+    /*@Threads(1)
+    @Benchmark
+    public void produceConsume(Blackhole blackhole) {
+        Runnable producers = () -> {
+            for (int j = 0; j < ITERATIONS; j++) {
+                try {
+                    int value = random.nextInt();
+                    producerConsumer.produce(value);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            latch.countDown();
+        };
+        Runnable consumers = () -> {
+            for (int j = 0; j < ITERATIONS; j++) {
+                try {
+                    producerConsumer.consume();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            latch.countDown();
+        };
+        long startTime = System.currentTimeMillis();
+        for (int i = 0; i < THREAD_COUNT / 2; i++) {
+            executorService.submit(producers);
+            executorService.submit(consumers);
+        }
+        try {
+            latch.await(); // Wait for all threads to finish
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
-    @Threads(2)
-    @Benchmark
-    public void th2(Blackhole blackhole) throws InterruptedException {
-        int value = random.nextInt();
-        if (Thread.currentThread().getId() % 2 == 0) {
-            producerConsumer.produce(value);
-        } else {
-            blackhole.consume(producerConsumer.consume());
-        }
     }
-    @Threads(4)
+*/
+    @Group("cp")
+    @GroupThreads(1)
     @Benchmark
-    public void th4(Blackhole blackhole) throws InterruptedException {
-        int value = random.nextInt();
-        if (Thread.currentThread().getId() % 2 == 0) {
-            producerConsumer.produce(value);
-        } else {
-            blackhole.consume(producerConsumer.consume());
-        }
+    public void produced() throws InterruptedException {
+        producerConsumer.produce(random.nextInt());
     }
-    @Threads(6)
+    @Group("cp")
+    @GroupThreads(3)
     @Benchmark
-    public void th6(Blackhole blackhole) throws InterruptedException {
-        int value = random.nextInt();
-        if (Thread.currentThread().getId() % 2 == 0) {
-            producerConsumer.produce(value);
-        } else {
-            blackhole.consume(producerConsumer.consume());
-        }
+    public void consume() throws InterruptedException {
+        producerConsumer.consume();
     }
-    @Threads(8)
-    @Benchmark
-    public void th8(Blackhole blackhole) throws InterruptedException {
-        int value = random.nextInt();
-        if (Thread.currentThread().getId() % 2 == 0) {
-            producerConsumer.produce(value);
-        } else {
-            blackhole.consume(producerConsumer.consume());
-        }
-    }
-    @Threads(10)
-    @Benchmark
-    public void th10(Blackhole blackhole) throws InterruptedException {
-        int value = random.nextInt();
-        if (Thread.currentThread().getId() % 2 == 0) {
-            producerConsumer.produce(value);
-        } else {
-            blackhole.consume(producerConsumer.consume());
-        }
-    }
-    @Threads(12)
-    @Benchmark
-    public void th12(Blackhole blackhole) throws InterruptedException {
-        int value = random.nextInt();
-        if (Thread.currentThread().getId() % 2 == 0) {
-            producerConsumer.produce(value);
-        } else {
-            blackhole.consume(producerConsumer.consume());
-        }
-    }
-    @Threads(14)
-    @Benchmark
-    public void th14(Blackhole blackhole) throws InterruptedException {
-        int value = random.nextInt();
-        if (Thread.currentThread().getId() % 2 == 0) {
-            producerConsumer.produce(value);
-        } else {
-            blackhole.consume(producerConsumer.consume());
-        }
-    }
-    @Threads(16)
-    @Benchmark
-    public void th16(Blackhole blackhole) throws InterruptedException {
-        int value = random.nextInt();
-        if (Thread.currentThread().getId() % 2 == 0) {
-            producerConsumer.produce(value);
-        } else {
-            blackhole.consume(producerConsumer.consume());
-        }
-    }
-    @Threads(18)
-    @Benchmark
-    public void th18(Blackhole blackhole) throws InterruptedException {
-        int value = random.nextInt();
-        if (Thread.currentThread().getId() % 2 == 0) {
-            producerConsumer.produce(value);
-        } else {
-            blackhole.consume(producerConsumer.consume());
-        }
-    }
-    @Threads(20)
-    @Benchmark
-    public void th20(Blackhole blackhole) throws InterruptedException {
-        int value = random.nextInt();
-        if (Thread.currentThread().getId() % 2 == 0) {
-            producerConsumer.produce(value);
-        } else {
-            blackhole.consume(producerConsumer.consume());
-        }
-    }
-    @Threads(22)
-    @Benchmark
-    public void th22(Blackhole blackhole) throws InterruptedException {
-        int value = random.nextInt();
-        if (Thread.currentThread().getId() % 2 == 0) {
-            producerConsumer.produce(value);
-        } else {
-            blackhole.consume(producerConsumer.consume());
-        }
-    }
-    @Threads(24)
-    @Benchmark
-    public void th24(Blackhole blackhole) throws InterruptedException {
-        int value = random.nextInt();
-        if (Thread.currentThread().getId() % 2 == 0) {
-            producerConsumer.produce(value);
-        } else {
-            blackhole.consume(producerConsumer.consume());
-        }
-    }
-    @Threads(26)
-    @Benchmark
-    public void th26(Blackhole blackhole) throws InterruptedException {
-        int value = random.nextInt();
-        if (Thread.currentThread().getId() % 2 == 0) {
-            producerConsumer.produce(value);
-        } else {
-            blackhole.consume(producerConsumer.consume());
-        }
-    }
-    @Threads(28)
-    @Benchmark
-    public void th28(Blackhole blackhole) throws InterruptedException {
-        int value = random.nextInt();
-        if (Thread.currentThread().getId() % 2 == 0) {
-            producerConsumer.produce(value);
-        } else {
-            blackhole.consume(producerConsumer.consume());
-        }
-    }
-    @Threads(30)
-    @Benchmark
-    public void th30(Blackhole blackhole) throws InterruptedException {
-        int value = random.nextInt();
-        if (Thread.currentThread().getId() % 2 == 0) {
-            producerConsumer.produce(value);
-        } else {
-            blackhole.consume(producerConsumer.consume());
-        }
-    }
-
-
 
 
     public static void main(String[] args) throws RunnerException {
@@ -191,7 +95,6 @@ public class JMHProducerConsumer {
                 .forks(1)
                 .warmupIterations(5)
                 .measurementIterations(5)
-                .timeUnit(TimeUnit.MILLISECONDS)
                 .build();
 
         new Runner(options).run();

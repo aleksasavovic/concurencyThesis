@@ -68,7 +68,6 @@ public class MatrixMultiplicationBenchmark {
         }
         executorService.shutdown();
         executorService.awaitTermination(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
-        System.out.println(matrixMultiplication.checkAuthenticity(matrixA,matrixB));
     }
 
     public static void main(String[] args) throws RunnerException {

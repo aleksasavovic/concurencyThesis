@@ -32,8 +32,8 @@ import org.openjdk.jmh.results.ScalarResult;
 import org.openjdk.jmh.results.AggregationPolicy;
 import org.openjdk.jmh.runner.FailureAssistException;
 
-import jmh.jmh_generated.JMHCounter_jmhType;
-public final class JMHCounter_incrementWith1Thread_jmhTest {
+import jmh.jmh_generated.ExperimentalProducerConsumer_jmhType;
+public final class ExperimentalProducerConsumer_testProducerConsumer_jmhTest {
 
     byte p000, p001, p002, p003, p004, p005, p006, p007, p008, p009, p010, p011, p012, p013, p014, p015;
     byte p016, p017, p018, p019, p020, p021, p022, p023, p024, p025, p026, p027, p028, p029, p030, p031;
@@ -58,7 +58,7 @@ public final class JMHCounter_incrementWith1Thread_jmhTest {
     Blackhole blackhole;
     Control notifyControl;
 
-    public BenchmarkTaskResult incrementWith1Thread_Throughput(InfraControl control, ThreadParams threadParams) throws Throwable {
+    public BenchmarkTaskResult testProducerConsumer_Throughput(InfraControl control, ThreadParams threadParams) throws Throwable {
         this.benchmarkParams = control.benchmarkParams;
         this.iterationParams = control.iterationParams;
         this.threadParams    = threadParams;
@@ -68,24 +68,24 @@ public final class JMHCounter_incrementWith1Thread_jmhTest {
         }
         if (threadParams.getSubgroupIndex() == 0) {
             RawResults res = new RawResults();
-            JMHCounter_jmhType l_jmhcounter0_G = _jmh_tryInit_f_jmhcounter0_G(control);
+            ExperimentalProducerConsumer_jmhType l_experimentalproducerconsumer0_G = _jmh_tryInit_f_experimentalproducerconsumer0_G(control);
 
             control.preSetup();
 
 
             control.announceWarmupReady();
             while (control.warmupShouldWait) {
-                l_jmhcounter0_G.incrementWith1Thread();
+                l_experimentalproducerconsumer0_G.testProducerConsumer();
                 res.allOps++;
             }
 
             notifyControl.startMeasurement = true;
-            incrementWith1Thread_thrpt_jmhStub(control, res, benchmarkParams, iterationParams, threadParams, blackhole, notifyControl, startRndMask, l_jmhcounter0_G);
+            testProducerConsumer_thrpt_jmhStub(control, res, benchmarkParams, iterationParams, threadParams, blackhole, notifyControl, startRndMask, l_experimentalproducerconsumer0_G);
             notifyControl.stopMeasurement = true;
             control.announceWarmdownReady();
             try {
                 while (control.warmdownShouldWait) {
-                    l_jmhcounter0_G.incrementWith1Thread();
+                    l_experimentalproducerconsumer0_G.testProducerConsumer();
                     res.allOps++;
                 }
                 control.preTearDown();
@@ -94,29 +94,30 @@ public final class JMHCounter_incrementWith1Thread_jmhTest {
             }
 
             if (control.isLastIteration()) {
-                if (JMHCounter_jmhType.tearTrialMutexUpdater.compareAndSet(l_jmhcounter0_G, 0, 1)) {
+                if (ExperimentalProducerConsumer_jmhType.tearTrialMutexUpdater.compareAndSet(l_experimentalproducerconsumer0_G, 0, 1)) {
                     try {
                         if (control.isFailing) throw new FailureAssistException();
-                        if (l_jmhcounter0_G.readyTrial) {
-                            l_jmhcounter0_G.readyTrial = false;
+                        if (l_experimentalproducerconsumer0_G.readyTrial) {
+                            l_experimentalproducerconsumer0_G.tearDown();
+                            l_experimentalproducerconsumer0_G.readyTrial = false;
                         }
                     } catch (Throwable t) {
                         control.isFailing = true;
                         throw t;
                     } finally {
-                        JMHCounter_jmhType.tearTrialMutexUpdater.set(l_jmhcounter0_G, 0);
+                        ExperimentalProducerConsumer_jmhType.tearTrialMutexUpdater.set(l_experimentalproducerconsumer0_G, 0);
                     }
                 } else {
-                    long l_jmhcounter0_G_backoff = 1;
-                    while (JMHCounter_jmhType.tearTrialMutexUpdater.get(l_jmhcounter0_G) == 1) {
-                        TimeUnit.MILLISECONDS.sleep(l_jmhcounter0_G_backoff);
-                        l_jmhcounter0_G_backoff = Math.max(1024, l_jmhcounter0_G_backoff * 2);
+                    long l_experimentalproducerconsumer0_G_backoff = 1;
+                    while (ExperimentalProducerConsumer_jmhType.tearTrialMutexUpdater.get(l_experimentalproducerconsumer0_G) == 1) {
+                        TimeUnit.MILLISECONDS.sleep(l_experimentalproducerconsumer0_G_backoff);
+                        l_experimentalproducerconsumer0_G_backoff = Math.max(1024, l_experimentalproducerconsumer0_G_backoff * 2);
                         if (control.isFailing) throw new FailureAssistException();
                         if (Thread.interrupted()) throw new InterruptedException();
                     }
                 }
                 synchronized(this.getClass()) {
-                    f_jmhcounter0_G = null;
+                    f_experimentalproducerconsumer0_G = null;
                 }
             }
             res.allOps += res.measuredOps;
@@ -127,19 +128,19 @@ public final class JMHCounter_incrementWith1Thread_jmhTest {
             res.measuredOps *= opsPerInv;
             res.measuredOps /= batchSize;
             BenchmarkTaskResult results = new BenchmarkTaskResult((long)res.allOps, (long)res.measuredOps);
-            results.add(new ThroughputResult(ResultRole.PRIMARY, "incrementWith1Thread", res.measuredOps, res.getTime(), benchmarkParams.getTimeUnit()));
+            results.add(new ThroughputResult(ResultRole.PRIMARY, "testProducerConsumer", res.measuredOps, res.getTime(), benchmarkParams.getTimeUnit()));
             this.blackhole.evaporate("Yes, I am Stephen Hawking, and know a thing or two about black holes.");
             return results;
         } else
             throw new IllegalStateException("Harness failed to distribute threads among groups properly");
     }
 
-    public static void incrementWith1Thread_thrpt_jmhStub(InfraControl control, RawResults result, BenchmarkParams benchmarkParams, IterationParams iterationParams, ThreadParams threadParams, Blackhole blackhole, Control notifyControl, int startRndMask, JMHCounter_jmhType l_jmhcounter0_G) throws Throwable {
+    public static void testProducerConsumer_thrpt_jmhStub(InfraControl control, RawResults result, BenchmarkParams benchmarkParams, IterationParams iterationParams, ThreadParams threadParams, Blackhole blackhole, Control notifyControl, int startRndMask, ExperimentalProducerConsumer_jmhType l_experimentalproducerconsumer0_G) throws Throwable {
         long operations = 0;
         long realTime = 0;
         result.startTime = System.nanoTime();
         do {
-            l_jmhcounter0_G.incrementWith1Thread();
+            l_experimentalproducerconsumer0_G.testProducerConsumer();
             operations++;
         } while(!control.isDone);
         result.stopTime = System.nanoTime();
@@ -148,7 +149,7 @@ public final class JMHCounter_incrementWith1Thread_jmhTest {
     }
 
 
-    public BenchmarkTaskResult incrementWith1Thread_AverageTime(InfraControl control, ThreadParams threadParams) throws Throwable {
+    public BenchmarkTaskResult testProducerConsumer_AverageTime(InfraControl control, ThreadParams threadParams) throws Throwable {
         this.benchmarkParams = control.benchmarkParams;
         this.iterationParams = control.iterationParams;
         this.threadParams    = threadParams;
@@ -158,24 +159,24 @@ public final class JMHCounter_incrementWith1Thread_jmhTest {
         }
         if (threadParams.getSubgroupIndex() == 0) {
             RawResults res = new RawResults();
-            JMHCounter_jmhType l_jmhcounter0_G = _jmh_tryInit_f_jmhcounter0_G(control);
+            ExperimentalProducerConsumer_jmhType l_experimentalproducerconsumer0_G = _jmh_tryInit_f_experimentalproducerconsumer0_G(control);
 
             control.preSetup();
 
 
             control.announceWarmupReady();
             while (control.warmupShouldWait) {
-                l_jmhcounter0_G.incrementWith1Thread();
+                l_experimentalproducerconsumer0_G.testProducerConsumer();
                 res.allOps++;
             }
 
             notifyControl.startMeasurement = true;
-            incrementWith1Thread_avgt_jmhStub(control, res, benchmarkParams, iterationParams, threadParams, blackhole, notifyControl, startRndMask, l_jmhcounter0_G);
+            testProducerConsumer_avgt_jmhStub(control, res, benchmarkParams, iterationParams, threadParams, blackhole, notifyControl, startRndMask, l_experimentalproducerconsumer0_G);
             notifyControl.stopMeasurement = true;
             control.announceWarmdownReady();
             try {
                 while (control.warmdownShouldWait) {
-                    l_jmhcounter0_G.incrementWith1Thread();
+                    l_experimentalproducerconsumer0_G.testProducerConsumer();
                     res.allOps++;
                 }
                 control.preTearDown();
@@ -184,29 +185,30 @@ public final class JMHCounter_incrementWith1Thread_jmhTest {
             }
 
             if (control.isLastIteration()) {
-                if (JMHCounter_jmhType.tearTrialMutexUpdater.compareAndSet(l_jmhcounter0_G, 0, 1)) {
+                if (ExperimentalProducerConsumer_jmhType.tearTrialMutexUpdater.compareAndSet(l_experimentalproducerconsumer0_G, 0, 1)) {
                     try {
                         if (control.isFailing) throw new FailureAssistException();
-                        if (l_jmhcounter0_G.readyTrial) {
-                            l_jmhcounter0_G.readyTrial = false;
+                        if (l_experimentalproducerconsumer0_G.readyTrial) {
+                            l_experimentalproducerconsumer0_G.tearDown();
+                            l_experimentalproducerconsumer0_G.readyTrial = false;
                         }
                     } catch (Throwable t) {
                         control.isFailing = true;
                         throw t;
                     } finally {
-                        JMHCounter_jmhType.tearTrialMutexUpdater.set(l_jmhcounter0_G, 0);
+                        ExperimentalProducerConsumer_jmhType.tearTrialMutexUpdater.set(l_experimentalproducerconsumer0_G, 0);
                     }
                 } else {
-                    long l_jmhcounter0_G_backoff = 1;
-                    while (JMHCounter_jmhType.tearTrialMutexUpdater.get(l_jmhcounter0_G) == 1) {
-                        TimeUnit.MILLISECONDS.sleep(l_jmhcounter0_G_backoff);
-                        l_jmhcounter0_G_backoff = Math.max(1024, l_jmhcounter0_G_backoff * 2);
+                    long l_experimentalproducerconsumer0_G_backoff = 1;
+                    while (ExperimentalProducerConsumer_jmhType.tearTrialMutexUpdater.get(l_experimentalproducerconsumer0_G) == 1) {
+                        TimeUnit.MILLISECONDS.sleep(l_experimentalproducerconsumer0_G_backoff);
+                        l_experimentalproducerconsumer0_G_backoff = Math.max(1024, l_experimentalproducerconsumer0_G_backoff * 2);
                         if (control.isFailing) throw new FailureAssistException();
                         if (Thread.interrupted()) throw new InterruptedException();
                     }
                 }
                 synchronized(this.getClass()) {
-                    f_jmhcounter0_G = null;
+                    f_experimentalproducerconsumer0_G = null;
                 }
             }
             res.allOps += res.measuredOps;
@@ -217,19 +219,19 @@ public final class JMHCounter_incrementWith1Thread_jmhTest {
             res.measuredOps *= opsPerInv;
             res.measuredOps /= batchSize;
             BenchmarkTaskResult results = new BenchmarkTaskResult((long)res.allOps, (long)res.measuredOps);
-            results.add(new AverageTimeResult(ResultRole.PRIMARY, "incrementWith1Thread", res.measuredOps, res.getTime(), benchmarkParams.getTimeUnit()));
+            results.add(new AverageTimeResult(ResultRole.PRIMARY, "testProducerConsumer", res.measuredOps, res.getTime(), benchmarkParams.getTimeUnit()));
             this.blackhole.evaporate("Yes, I am Stephen Hawking, and know a thing or two about black holes.");
             return results;
         } else
             throw new IllegalStateException("Harness failed to distribute threads among groups properly");
     }
 
-    public static void incrementWith1Thread_avgt_jmhStub(InfraControl control, RawResults result, BenchmarkParams benchmarkParams, IterationParams iterationParams, ThreadParams threadParams, Blackhole blackhole, Control notifyControl, int startRndMask, JMHCounter_jmhType l_jmhcounter0_G) throws Throwable {
+    public static void testProducerConsumer_avgt_jmhStub(InfraControl control, RawResults result, BenchmarkParams benchmarkParams, IterationParams iterationParams, ThreadParams threadParams, Blackhole blackhole, Control notifyControl, int startRndMask, ExperimentalProducerConsumer_jmhType l_experimentalproducerconsumer0_G) throws Throwable {
         long operations = 0;
         long realTime = 0;
         result.startTime = System.nanoTime();
         do {
-            l_jmhcounter0_G.incrementWith1Thread();
+            l_experimentalproducerconsumer0_G.testProducerConsumer();
             operations++;
         } while(!control.isDone);
         result.stopTime = System.nanoTime();
@@ -238,7 +240,7 @@ public final class JMHCounter_incrementWith1Thread_jmhTest {
     }
 
 
-    public BenchmarkTaskResult incrementWith1Thread_SampleTime(InfraControl control, ThreadParams threadParams) throws Throwable {
+    public BenchmarkTaskResult testProducerConsumer_SampleTime(InfraControl control, ThreadParams threadParams) throws Throwable {
         this.benchmarkParams = control.benchmarkParams;
         this.iterationParams = control.iterationParams;
         this.threadParams    = threadParams;
@@ -248,14 +250,14 @@ public final class JMHCounter_incrementWith1Thread_jmhTest {
         }
         if (threadParams.getSubgroupIndex() == 0) {
             RawResults res = new RawResults();
-            JMHCounter_jmhType l_jmhcounter0_G = _jmh_tryInit_f_jmhcounter0_G(control);
+            ExperimentalProducerConsumer_jmhType l_experimentalproducerconsumer0_G = _jmh_tryInit_f_experimentalproducerconsumer0_G(control);
 
             control.preSetup();
 
 
             control.announceWarmupReady();
             while (control.warmupShouldWait) {
-                l_jmhcounter0_G.incrementWith1Thread();
+                l_experimentalproducerconsumer0_G.testProducerConsumer();
                 res.allOps++;
             }
 
@@ -264,12 +266,12 @@ public final class JMHCounter_incrementWith1Thread_jmhTest {
             int batchSize = iterationParams.getBatchSize();
             int opsPerInv = benchmarkParams.getOpsPerInvocation();
             SampleBuffer buffer = new SampleBuffer();
-            incrementWith1Thread_sample_jmhStub(control, res, benchmarkParams, iterationParams, threadParams, blackhole, notifyControl, startRndMask, buffer, targetSamples, opsPerInv, batchSize, l_jmhcounter0_G);
+            testProducerConsumer_sample_jmhStub(control, res, benchmarkParams, iterationParams, threadParams, blackhole, notifyControl, startRndMask, buffer, targetSamples, opsPerInv, batchSize, l_experimentalproducerconsumer0_G);
             notifyControl.stopMeasurement = true;
             control.announceWarmdownReady();
             try {
                 while (control.warmdownShouldWait) {
-                    l_jmhcounter0_G.incrementWith1Thread();
+                    l_experimentalproducerconsumer0_G.testProducerConsumer();
                     res.allOps++;
                 }
                 control.preTearDown();
@@ -278,29 +280,30 @@ public final class JMHCounter_incrementWith1Thread_jmhTest {
             }
 
             if (control.isLastIteration()) {
-                if (JMHCounter_jmhType.tearTrialMutexUpdater.compareAndSet(l_jmhcounter0_G, 0, 1)) {
+                if (ExperimentalProducerConsumer_jmhType.tearTrialMutexUpdater.compareAndSet(l_experimentalproducerconsumer0_G, 0, 1)) {
                     try {
                         if (control.isFailing) throw new FailureAssistException();
-                        if (l_jmhcounter0_G.readyTrial) {
-                            l_jmhcounter0_G.readyTrial = false;
+                        if (l_experimentalproducerconsumer0_G.readyTrial) {
+                            l_experimentalproducerconsumer0_G.tearDown();
+                            l_experimentalproducerconsumer0_G.readyTrial = false;
                         }
                     } catch (Throwable t) {
                         control.isFailing = true;
                         throw t;
                     } finally {
-                        JMHCounter_jmhType.tearTrialMutexUpdater.set(l_jmhcounter0_G, 0);
+                        ExperimentalProducerConsumer_jmhType.tearTrialMutexUpdater.set(l_experimentalproducerconsumer0_G, 0);
                     }
                 } else {
-                    long l_jmhcounter0_G_backoff = 1;
-                    while (JMHCounter_jmhType.tearTrialMutexUpdater.get(l_jmhcounter0_G) == 1) {
-                        TimeUnit.MILLISECONDS.sleep(l_jmhcounter0_G_backoff);
-                        l_jmhcounter0_G_backoff = Math.max(1024, l_jmhcounter0_G_backoff * 2);
+                    long l_experimentalproducerconsumer0_G_backoff = 1;
+                    while (ExperimentalProducerConsumer_jmhType.tearTrialMutexUpdater.get(l_experimentalproducerconsumer0_G) == 1) {
+                        TimeUnit.MILLISECONDS.sleep(l_experimentalproducerconsumer0_G_backoff);
+                        l_experimentalproducerconsumer0_G_backoff = Math.max(1024, l_experimentalproducerconsumer0_G_backoff * 2);
                         if (control.isFailing) throw new FailureAssistException();
                         if (Thread.interrupted()) throw new InterruptedException();
                     }
                 }
                 synchronized(this.getClass()) {
-                    f_jmhcounter0_G = null;
+                    f_experimentalproducerconsumer0_G = null;
                 }
             }
             res.allOps += res.measuredOps * batchSize;
@@ -308,14 +311,14 @@ public final class JMHCounter_incrementWith1Thread_jmhTest {
             res.allOps /= batchSize;
             res.measuredOps *= opsPerInv;
             BenchmarkTaskResult results = new BenchmarkTaskResult((long)res.allOps, (long)res.measuredOps);
-            results.add(new SampleTimeResult(ResultRole.PRIMARY, "incrementWith1Thread", buffer, benchmarkParams.getTimeUnit()));
+            results.add(new SampleTimeResult(ResultRole.PRIMARY, "testProducerConsumer", buffer, benchmarkParams.getTimeUnit()));
             this.blackhole.evaporate("Yes, I am Stephen Hawking, and know a thing or two about black holes.");
             return results;
         } else
             throw new IllegalStateException("Harness failed to distribute threads among groups properly");
     }
 
-    public static void incrementWith1Thread_sample_jmhStub(InfraControl control, RawResults result, BenchmarkParams benchmarkParams, IterationParams iterationParams, ThreadParams threadParams, Blackhole blackhole, Control notifyControl, int startRndMask, SampleBuffer buffer, int targetSamples, long opsPerInv, int batchSize, JMHCounter_jmhType l_jmhcounter0_G) throws Throwable {
+    public static void testProducerConsumer_sample_jmhStub(InfraControl control, RawResults result, BenchmarkParams benchmarkParams, IterationParams iterationParams, ThreadParams threadParams, Blackhole blackhole, Control notifyControl, int startRndMask, SampleBuffer buffer, int targetSamples, long opsPerInv, int batchSize, ExperimentalProducerConsumer_jmhType l_experimentalproducerconsumer0_G) throws Throwable {
         long realTime = 0;
         long operations = 0;
         int rnd = (int)System.nanoTime();
@@ -330,7 +333,7 @@ public final class JMHCounter_incrementWith1Thread_jmhTest {
             }
             for (int b = 0; b < batchSize; b++) {
                 if (control.volatileSpoiler) return;
-                l_jmhcounter0_G.incrementWith1Thread();
+                l_experimentalproducerconsumer0_G.testProducerConsumer();
             }
             if (sample) {
                 buffer.add((System.nanoTime() - time) / opsPerInv);
@@ -348,7 +351,7 @@ public final class JMHCounter_incrementWith1Thread_jmhTest {
     }
 
 
-    public BenchmarkTaskResult incrementWith1Thread_SingleShotTime(InfraControl control, ThreadParams threadParams) throws Throwable {
+    public BenchmarkTaskResult testProducerConsumer_SingleShotTime(InfraControl control, ThreadParams threadParams) throws Throwable {
         this.benchmarkParams = control.benchmarkParams;
         this.iterationParams = control.iterationParams;
         this.threadParams    = threadParams;
@@ -357,7 +360,7 @@ public final class JMHCounter_incrementWith1Thread_jmhTest {
             this.blackhole = new Blackhole("Today's password is swordfish. I understand instantiating Blackholes directly is dangerous.");
         }
         if (threadParams.getSubgroupIndex() == 0) {
-            JMHCounter_jmhType l_jmhcounter0_G = _jmh_tryInit_f_jmhcounter0_G(control);
+            ExperimentalProducerConsumer_jmhType l_experimentalproducerconsumer0_G = _jmh_tryInit_f_experimentalproducerconsumer0_G(control);
 
             control.preSetup();
 
@@ -365,79 +368,76 @@ public final class JMHCounter_incrementWith1Thread_jmhTest {
             notifyControl.startMeasurement = true;
             RawResults res = new RawResults();
             int batchSize = iterationParams.getBatchSize();
-            incrementWith1Thread_ss_jmhStub(control, res, benchmarkParams, iterationParams, threadParams, blackhole, notifyControl, startRndMask, batchSize, l_jmhcounter0_G);
+            testProducerConsumer_ss_jmhStub(control, res, benchmarkParams, iterationParams, threadParams, blackhole, notifyControl, startRndMask, batchSize, l_experimentalproducerconsumer0_G);
             control.preTearDown();
 
             if (control.isLastIteration()) {
-                if (JMHCounter_jmhType.tearTrialMutexUpdater.compareAndSet(l_jmhcounter0_G, 0, 1)) {
+                if (ExperimentalProducerConsumer_jmhType.tearTrialMutexUpdater.compareAndSet(l_experimentalproducerconsumer0_G, 0, 1)) {
                     try {
                         if (control.isFailing) throw new FailureAssistException();
-                        if (l_jmhcounter0_G.readyTrial) {
-                            l_jmhcounter0_G.readyTrial = false;
+                        if (l_experimentalproducerconsumer0_G.readyTrial) {
+                            l_experimentalproducerconsumer0_G.tearDown();
+                            l_experimentalproducerconsumer0_G.readyTrial = false;
                         }
                     } catch (Throwable t) {
                         control.isFailing = true;
                         throw t;
                     } finally {
-                        JMHCounter_jmhType.tearTrialMutexUpdater.set(l_jmhcounter0_G, 0);
+                        ExperimentalProducerConsumer_jmhType.tearTrialMutexUpdater.set(l_experimentalproducerconsumer0_G, 0);
                     }
                 } else {
-                    long l_jmhcounter0_G_backoff = 1;
-                    while (JMHCounter_jmhType.tearTrialMutexUpdater.get(l_jmhcounter0_G) == 1) {
-                        TimeUnit.MILLISECONDS.sleep(l_jmhcounter0_G_backoff);
-                        l_jmhcounter0_G_backoff = Math.max(1024, l_jmhcounter0_G_backoff * 2);
+                    long l_experimentalproducerconsumer0_G_backoff = 1;
+                    while (ExperimentalProducerConsumer_jmhType.tearTrialMutexUpdater.get(l_experimentalproducerconsumer0_G) == 1) {
+                        TimeUnit.MILLISECONDS.sleep(l_experimentalproducerconsumer0_G_backoff);
+                        l_experimentalproducerconsumer0_G_backoff = Math.max(1024, l_experimentalproducerconsumer0_G_backoff * 2);
                         if (control.isFailing) throw new FailureAssistException();
                         if (Thread.interrupted()) throw new InterruptedException();
                     }
                 }
                 synchronized(this.getClass()) {
-                    f_jmhcounter0_G = null;
+                    f_experimentalproducerconsumer0_G = null;
                 }
             }
             int opsPerInv = control.benchmarkParams.getOpsPerInvocation();
             long totalOps = opsPerInv;
             BenchmarkTaskResult results = new BenchmarkTaskResult(totalOps, totalOps);
-            results.add(new SingleShotResult(ResultRole.PRIMARY, "incrementWith1Thread", res.getTime(), benchmarkParams.getTimeUnit()));
+            results.add(new SingleShotResult(ResultRole.PRIMARY, "testProducerConsumer", res.getTime(), benchmarkParams.getTimeUnit()));
             this.blackhole.evaporate("Yes, I am Stephen Hawking, and know a thing or two about black holes.");
             return results;
         } else
             throw new IllegalStateException("Harness failed to distribute threads among groups properly");
     }
 
-    public static void incrementWith1Thread_ss_jmhStub(InfraControl control, RawResults result, BenchmarkParams benchmarkParams, IterationParams iterationParams, ThreadParams threadParams, Blackhole blackhole, Control notifyControl, int startRndMask, int batchSize, JMHCounter_jmhType l_jmhcounter0_G) throws Throwable {
+    public static void testProducerConsumer_ss_jmhStub(InfraControl control, RawResults result, BenchmarkParams benchmarkParams, IterationParams iterationParams, ThreadParams threadParams, Blackhole blackhole, Control notifyControl, int startRndMask, int batchSize, ExperimentalProducerConsumer_jmhType l_experimentalproducerconsumer0_G) throws Throwable {
         long realTime = 0;
         result.startTime = System.nanoTime();
         for (int b = 0; b < batchSize; b++) {
             if (control.volatileSpoiler) return;
-            l_jmhcounter0_G.incrementWith1Thread();
+            l_experimentalproducerconsumer0_G.testProducerConsumer();
         }
         result.stopTime = System.nanoTime();
         result.realTime = realTime;
     }
 
     
-    static volatile JMHCounter_jmhType f_jmhcounter0_G;
+    static volatile ExperimentalProducerConsumer_jmhType f_experimentalproducerconsumer0_G;
     
-    JMHCounter_jmhType _jmh_tryInit_f_jmhcounter0_G(InfraControl control) throws Throwable {
-        JMHCounter_jmhType val = f_jmhcounter0_G;
+    ExperimentalProducerConsumer_jmhType _jmh_tryInit_f_experimentalproducerconsumer0_G(InfraControl control) throws Throwable {
+        ExperimentalProducerConsumer_jmhType val = f_experimentalproducerconsumer0_G;
         if (val != null) {
             return val;
         }
         synchronized(this.getClass()) {
             try {
             if (control.isFailing) throw new FailureAssistException();
-            val = f_jmhcounter0_G;
+            val = f_experimentalproducerconsumer0_G;
             if (val != null) {
                 return val;
             }
-            val = new JMHCounter_jmhType();
-            Field f;
-            f = jmh.JMHCounter.class.getDeclaredField("synchronizationType");
-            f.setAccessible(true);
-            f.set(val, control.getParam("synchronizationType"));
+            val = new ExperimentalProducerConsumer_jmhType();
             val.setup();
             val.readyTrial = true;
-            f_jmhcounter0_G = val;
+            f_experimentalproducerconsumer0_G = val;
             } catch (Throwable t) {
                 control.isFailing = true;
                 throw t;

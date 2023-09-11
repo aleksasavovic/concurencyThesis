@@ -15,19 +15,6 @@ JMH S 14 jmh.JMHCounter S 59 jmh.jmh_generated.JMHCounter_twelveThreadsBenchmark
 JMH S 14 jmh.JMHCounter S 63 jmh.jmh_generated.JMHCounter_twentyFiveThreadsBenchmark_jmhTest S 26 twentyFiveThreadsBenchmark S 10 Throughput I 2 25 A 1 1 1 E E E E E E E E E E E E E E U 12 MILLISECONDS E E 
 JMH S 14 jmh.JMHCounter S 59 jmh.jmh_generated.JMHCounter_twentyThreadsBenchmark_jmhTest S 22 twentyThreadsBenchmark S 10 Throughput I 2 20 A 1 1 1 E E E E E E E E E E E E E E U 12 MILLISECONDS E E 
 JMH S 14 jmh.JMHCounter S 56 jmh.jmh_generated.JMHCounter_twoThreadsBenchmark_jmhTest S 19 twoThreadsBenchmark S 10 Throughput I 1 2 A 1 1 1 E E E E E E E E E E E E E E U 12 MILLISECONDS E E 
-JMH S 23 jmh.JMHProducerConsumer S 50 jmh.jmh_generated.JMHProducerConsumer_th10_jmhTest S 4 th10 S 10 Throughput I 2 10 A 1 1 1 E E E E E E E E E E E E E E U 12 MILLISECONDS E E 
-JMH S 23 jmh.JMHProducerConsumer S 50 jmh.jmh_generated.JMHProducerConsumer_th12_jmhTest S 4 th12 S 10 Throughput I 2 12 A 1 1 1 E E E E E E E E E E E E E E U 12 MILLISECONDS E E 
-JMH S 23 jmh.JMHProducerConsumer S 50 jmh.jmh_generated.JMHProducerConsumer_th14_jmhTest S 4 th14 S 10 Throughput I 2 14 A 1 1 1 E E E E E E E E E E E E E E U 12 MILLISECONDS E E 
-JMH S 23 jmh.JMHProducerConsumer S 50 jmh.jmh_generated.JMHProducerConsumer_th16_jmhTest S 4 th16 S 10 Throughput I 2 16 A 1 1 1 E E E E E E E E E E E E E E U 12 MILLISECONDS E E 
-JMH S 23 jmh.JMHProducerConsumer S 50 jmh.jmh_generated.JMHProducerConsumer_th18_jmhTest S 4 th18 S 10 Throughput I 2 18 A 1 1 1 E E E E E E E E E E E E E E U 12 MILLISECONDS E E 
-JMH S 23 jmh.JMHProducerConsumer S 49 jmh.jmh_generated.JMHProducerConsumer_th2_jmhTest S 3 th2 S 10 Throughput I 1 2 A 1 1 1 E E E E E E E E E E E E E E U 12 MILLISECONDS E E 
-JMH S 23 jmh.JMHProducerConsumer S 50 jmh.jmh_generated.JMHProducerConsumer_th20_jmhTest S 4 th20 S 10 Throughput I 2 20 A 1 1 1 E E E E E E E E E E E E E E U 12 MILLISECONDS E E 
-JMH S 23 jmh.JMHProducerConsumer S 50 jmh.jmh_generated.JMHProducerConsumer_th22_jmhTest S 4 th22 S 10 Throughput I 2 22 A 1 1 1 E E E E E E E E E E E E E E U 12 MILLISECONDS E E 
-JMH S 23 jmh.JMHProducerConsumer S 50 jmh.jmh_generated.JMHProducerConsumer_th24_jmhTest S 4 th24 S 10 Throughput I 2 24 A 1 1 1 E E E E E E E E E E E E E E U 12 MILLISECONDS E E 
-JMH S 23 jmh.JMHProducerConsumer S 50 jmh.jmh_generated.JMHProducerConsumer_th26_jmhTest S 4 th26 S 10 Throughput I 2 26 A 1 1 1 E E E E E E E E E E E E E E U 12 MILLISECONDS E E 
-JMH S 23 jmh.JMHProducerConsumer S 50 jmh.jmh_generated.JMHProducerConsumer_th28_jmhTest S 4 th28 S 10 Throughput I 2 28 A 1 1 1 E E E E E E E E E E E E E E U 12 MILLISECONDS E E 
-JMH S 23 jmh.JMHProducerConsumer S 50 jmh.jmh_generated.JMHProducerConsumer_th30_jmhTest S 4 th30 S 10 Throughput I 2 30 A 1 1 1 E E E E E E E E E E E E E E U 12 MILLISECONDS E E 
-JMH S 23 jmh.JMHProducerConsumer S 49 jmh.jmh_generated.JMHProducerConsumer_th4_jmhTest S 3 th4 S 10 Throughput I 1 4 A 1 1 1 E E E E E E E E E E E E E E U 12 MILLISECONDS E E 
-JMH S 23 jmh.JMHProducerConsumer S 49 jmh.jmh_generated.JMHProducerConsumer_th6_jmhTest S 3 th6 S 10 Throughput I 1 6 A 1 1 1 E E E E E E E E E E E E E E U 12 MILLISECONDS E E 
-JMH S 23 jmh.JMHProducerConsumer S 49 jmh.jmh_generated.JMHProducerConsumer_th8_jmhTest S 3 th8 S 10 Throughput I 1 8 A 1 1 1 E E E E E E E E E E E E E E U 12 MILLISECONDS E E 
+JMH S 23 jmh.JMHProducerConsumer S 48 jmh.jmh_generated.JMHProducerConsumer_cp_jmhTest S 2 cp S 10 Throughput E A 2 1 3 1 1 L 2 7 consume 8 produced E E E E E E E E E E E E E U 12 MILLISECONDS E E 
+JMH S 32 jmh.ExperimentalProducerConsumer S 75 jmh.jmh_generated.ExperimentalProducerConsumer_testProducerConsumer_jmhTest S 20 testProducerConsumer S 11 AverageTime I 1 1 A 1 1 1 E E E E E E E E E E E E E E U 7 SECONDS E E 
 JMH S 33 jmh.MatrixMultiplicationBenchmark S 85 jmh.jmh_generated.MatrixMultiplicationBenchmark_matrixMultiplicationBenchmark_jmhTest S 29 matrixMultiplicationBenchmark S 11 AverageTime E A 1 1 1 E I 1 3 T 3 1 s E I 1 5 T 3 1 s E E E E E E E M 2 10 matrixSize 1 8 1AAMAADA 15 numberOfThreads 1 8 xAgMAA== E E E 
