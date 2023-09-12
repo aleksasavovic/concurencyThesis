@@ -98,6 +98,7 @@ public final class MatrixMultiplicationBenchmark_matrixMultiplicationBenchmark_j
                     try {
                         if (control.isFailing) throw new FailureAssistException();
                         if (l_matrixmultiplicationbenchmark0_G.readyTrial) {
+                            l_matrixmultiplicationbenchmark0_G.teardown();
                             l_matrixmultiplicationbenchmark0_G.readyTrial = false;
                         }
                     } catch (Throwable t) {
@@ -188,6 +189,7 @@ public final class MatrixMultiplicationBenchmark_matrixMultiplicationBenchmark_j
                     try {
                         if (control.isFailing) throw new FailureAssistException();
                         if (l_matrixmultiplicationbenchmark0_G.readyTrial) {
+                            l_matrixmultiplicationbenchmark0_G.teardown();
                             l_matrixmultiplicationbenchmark0_G.readyTrial = false;
                         }
                     } catch (Throwable t) {
@@ -282,6 +284,7 @@ public final class MatrixMultiplicationBenchmark_matrixMultiplicationBenchmark_j
                     try {
                         if (control.isFailing) throw new FailureAssistException();
                         if (l_matrixmultiplicationbenchmark0_G.readyTrial) {
+                            l_matrixmultiplicationbenchmark0_G.teardown();
                             l_matrixmultiplicationbenchmark0_G.readyTrial = false;
                         }
                     } catch (Throwable t) {
@@ -373,6 +376,7 @@ public final class MatrixMultiplicationBenchmark_matrixMultiplicationBenchmark_j
                     try {
                         if (control.isFailing) throw new FailureAssistException();
                         if (l_matrixmultiplicationbenchmark0_G.readyTrial) {
+                            l_matrixmultiplicationbenchmark0_G.teardown();
                             l_matrixmultiplicationbenchmark0_G.readyTrial = false;
                         }
                     } catch (Throwable t) {

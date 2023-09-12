@@ -1,14 +1,16 @@
 package matrixMultiplication;
 
+import java.util.concurrent.Semaphore;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-public class ReentrantLockMatrixMultiplication implements MatrixMultiplication {
-    Lock lock = new ReentrantLock();
+public class SemaphoreMatrixMultiplication implements MatrixMultiplication {
+    Semaphore mutex;
     int size;
     int[][] resultMatrix;
 
-    public ReentrantLockMatrixMultiplication(int size) {
+    public SemaphoreMatrixMultiplication(int size) {
+        mutex = new Semaphore(1);
         this.size = size;
         resultMatrix = new int[size][size];
     }
@@ -19,11 +21,13 @@ public class ReentrantLockMatrixMultiplication implements MatrixMultiplication {
         for (int j = startColumn; j < endColumn; j++) {
             for (int i = 0; i < length; i++) {
                 for (int k = 0; k < length; k++) {
-                    lock.lock();
                     try {
+                        mutex.acquire();
                         resultMatrix[k][i] += matrixA[k][j] * matrixB[j][i];
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
                     } finally {
-                        lock.unlock();
+                        mutex.release();
                     }
                 }
             }

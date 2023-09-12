@@ -21,10 +21,12 @@ import java.util.concurrent.TimeUnit;
 @Threads(1) // Adjust the number of threads as needed
 public class ExperimentalProducerConsumer {
 
-    private SemaphoreProducerConsumer producerConsumer;
+    private ProducereConsumer producerConsumer;
     private int numItems = 10000000; // Adjust this based on your testing requirements
     private int numProducers; // Adjust the number of producer threads
     private int numConsumers; // Adjust the number of consumer threads
+
+    @Param({"2", "4", "6", "8", "10", "12", "14", "16", "18", "20", "22", "24", "26", "28", "30"})
     private int numThreads;
     private int operationPerThread;
     CountDownLatch startLatch;
@@ -33,7 +35,6 @@ public class ExperimentalProducerConsumer {
 
     @Setup
     public void setup() {
-        numThreads = 10;
         numConsumers = numThreads / 2;
         numProducers = numThreads / 2;
         operationPerThread = numItems / numThreads;
@@ -91,7 +92,7 @@ public class ExperimentalProducerConsumer {
     public static void main(String[] args) throws Exception {
         Options options = new OptionsBuilder()
                 .include(ExperimentalProducerConsumer.class.getSimpleName())
-                .forks(1)
+                .forks(2)
                 .warmupIterations(5)
                 .measurementIterations(5)
                 .build();

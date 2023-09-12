@@ -18,7 +18,6 @@ public class AtomicProducerConsumer implements ProducereConsumer {
     @Override
     public void produce(int value) throws InterruptedException {
         while (true) {
-
             int currentProducerIndex = producerIndex.get();
             int currentConsumerIndex = consumerIndex.get();
             int nextProducerIndex = currentProducerIndex + 1;
@@ -26,15 +25,12 @@ public class AtomicProducerConsumer implements ProducereConsumer {
                 continue;
             }
             if (producerIndex.compareAndSet(currentProducerIndex, nextProducerIndex)) {
-                //System.out.println("producer " +producerIndex.get()+ " " +consumerIndex.get());
-                //System.out.println("Producer produced" + value);
                 int index = currentProducerIndex % bufferSize;
                 buffer[index] = value;
                 break;
             }
         }
     }
-
     @Override
     public int consume() throws InterruptedException {
         int value;
@@ -49,12 +45,10 @@ public class AtomicProducerConsumer implements ProducereConsumer {
             if (consumerIndex.compareAndSet(currentConsumerIndex, nextConsumerIndex)) {
                 int index = currentConsumerIndex % bufferSize;
                 value = buffer[index];
-                //System.out.println("consumed "+ consumerIndex.get());
-                //System.out.println("Thread : " + Thread.currentThread().getId()+ " Consumer consumed" + value+" " + producerIndex.get()+" "+ consumerIndex.get()+" "+nextConsumerIndex);
-                //System.out.println("consumer "+ producerIndex.get()+ " " +consumerIndex.get());
                 break;
             }
         }
         return value;
     }
 }
+

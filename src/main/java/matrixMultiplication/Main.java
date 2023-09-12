@@ -1,7 +1,9 @@
 package matrixMultiplication;
 
 import matrixMultiplication.lockPerfield.ReentrantLockPerFieldMatrixMultiplication;
+import matrixMultiplication.lockPerfield.SemaphorePerFieldMatrixMultiplication;
 import matrixMultiplication.optimized.ReentrantLockOptimizedMatrixMultiplication;
+import matrixMultiplication.optimized.SemaphoreOptimizedMatrixMultiplication;
 import matrixMultiplication.optimized.SynchronizedOptimizedMatrixMultiplication;
 
 import java.util.Random;
@@ -14,12 +16,15 @@ public class Main {
         final int matrixSize = 500;
         final int numberOfThreads = 12;
         //MatrixMultiplication matrixMultiplication = new SynchronizedMatrixMultiplication(matrixSize);
-        //MatrixMultiplication matrixMultiplication = new ReentrantLockMatrixMultiplication(matrixSize);
+        MatrixMultiplication matrixMultiplication = new ReentrantLockMatrixMultiplication(matrixSize);
         //MatrixMultiplication matrixMultiplication = new SynchronizedLockPerFieldMatrixMultiplication(matrixSize);
         //MatrixMultiplication matrixMultiplication = new ReentrantLockPerFieldMatrixMultiplication(matrixSize);
         //MatrixMultiplication matrixMultiplication = new SynchronizedOptimizedMatrixMultiplication(matrixSize);
         //MatrixMultiplication matrixMultiplication = new ReentrantLockOptimizedMatrixMultiplication(matrixSize);
-        MatrixMultiplication matrixMultiplication = new AtomicMatrixMultiplication(matrixSize);
+        //MatrixMultiplication matrixMultiplication = new AtomicMatrixMultiplication(matrixSize);
+        //MatrixMultiplication matrixMultiplication = new SemaphoreMatrixMultiplication(matrixSize);
+        //MatrixMultiplication matrixMultiplication = new SemaphoreOptimizedMatrixMultiplication(matrixSize);
+        //MatrixMultiplication matrixMultiplication = new SemaphorePerFieldMatrixMultiplication(matrixSize);
 
         int[][] matrixA, matrixB;
         matrixA = createRandomMatrix(matrixSize, matrixSize);
@@ -46,6 +51,7 @@ public class Main {
         long endTime = System.currentTimeMillis();
 
         System.out.println(endTime - startTime);
+        System.out.println(matrixMultiplication.checkAuthenticity(matrixA,matrixB));
 
 
     }

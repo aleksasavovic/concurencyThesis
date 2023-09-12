@@ -435,6 +435,10 @@ public final class ExperimentalProducerConsumer_testProducerConsumer_jmhTest {
                 return val;
             }
             val = new ExperimentalProducerConsumer_jmhType();
+            Field f;
+            f = jmh.ExperimentalProducerConsumer.class.getDeclaredField("numThreads");
+            f.setAccessible(true);
+            f.set(val, Integer.valueOf(control.getParam("numThreads")));
             val.setup();
             val.readyTrial = true;
             f_experimentalproducerconsumer0_G = val;

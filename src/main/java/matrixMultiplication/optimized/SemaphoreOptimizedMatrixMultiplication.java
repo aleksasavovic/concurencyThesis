@@ -1,35 +1,42 @@
-package matrixMultiplication;
+package matrixMultiplication.optimized;
 
+import matrixMultiplication.MatrixMultiplication;
+
+import java.util.concurrent.Semaphore;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-public class ReentrantLockMatrixMultiplication implements MatrixMultiplication {
-    Lock lock = new ReentrantLock();
+public class SemaphoreOptimizedMatrixMultiplication implements MatrixMultiplication {
+    Semaphore[] mutexes;
     int size;
     int[][] resultMatrix;
 
-    public ReentrantLockMatrixMultiplication(int size) {
+    public SemaphoreOptimizedMatrixMultiplication(int size) {
         this.size = size;
         resultMatrix = new int[size][size];
+        mutexes = new Semaphore[size];
+        for (int i = 0; i < size; i++) {
+            mutexes[i] = new Semaphore(1);
+        }
     }
 
     @Override
     public void multiply(int[][] matrixA, int[][] matrixB, int startColumn, int endColumn) {
-        int length = matrixA.length;
         for (int j = startColumn; j < endColumn; j++) {
-            for (int i = 0; i < length; i++) {
-                for (int k = 0; k < length; k++) {
-                    lock.lock();
+            for (int i = 0; i < size; i++) {
+                for (int k = 0; k < size; k++) {
                     try {
+                        mutexes[k].acquire();
                         resultMatrix[k][i] += matrixA[k][j] * matrixB[j][i];
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
                     } finally {
-                        lock.unlock();
+                        mutexes[k].release();
                     }
                 }
             }
         }
     }
-
     @Override
     public boolean checkAuthenticity(int[][] matrixA, int[][] matrixB) {
         int size = matrixA.length;

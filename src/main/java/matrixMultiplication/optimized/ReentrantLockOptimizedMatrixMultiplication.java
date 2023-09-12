@@ -24,8 +24,11 @@ public class ReentrantLockOptimizedMatrixMultiplication implements MatrixMultipl
             for (int i = 0; i < size; i++) {
                 for (int k = 0; k < size; k++) {
                     locks[k].lock();
-                    resultMatrix[k][i] += matrixA[k][j] * matrixB[j][i];
-                    locks[k].unlock();
+                    try {
+                        resultMatrix[k][i] += matrixA[k][j] * matrixB[j][i];
+                    } finally {
+                        locks[k].unlock();
+                    }
                 }
             }
         }
@@ -41,13 +44,6 @@ public class ReentrantLockOptimizedMatrixMultiplication implements MatrixMultipl
                 }
             }
         }
-//        printMatrix(result);
-//        System.out.println();
-//        System.out.println();
-//        System.out.println();
-//        System.out.println();
-//        System.out.println();
-//        printMatrix(regularResult);
         for (int row = 0; row < resultMatrix.length; row++) {
             for (int col = 0; col < resultMatrix[row].length; col++) {
                 if (resultMatrix[row][col] != regularResult[row][col])

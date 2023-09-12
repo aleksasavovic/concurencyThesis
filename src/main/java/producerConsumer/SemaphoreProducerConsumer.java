@@ -8,8 +8,8 @@ public class SemaphoreProducerConsumer implements ProducereConsumer {
     private Semaphore mutex;
     private Semaphore empty;
     private Semaphore full;
-    public int consumerIndex;
-    public int producerIndex;
+    private int consumerIndex;
+    private int producerIndex;
 
     public SemaphoreProducerConsumer() {
         buffer = new int[bufferSize];
