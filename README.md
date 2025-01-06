@@ -1,4 +1,4 @@
-# Java Synchronization and Performance Analysis
+# Analysis, Application, and Performance of Different Concurrency Models and Synchronization Strategies
 
 This repository contains the implementation and analysis for my **Master's Thesis**, which explores various Java synchronization methods, the Java Memory Model (JMM), and the impact of the Just-In-Time (JIT) compiler on performance. The project uses **Java Microbenchmark Harness (JMH)** to measure synchronization performance on a range of problems.
 
@@ -32,7 +32,7 @@ The thesis investigates:
 The experiments provide insights into:
 - How different synchronization methods compare in terms of performance.
 - The role of the JMM in thread synchronization and memory visibility.
-- How JIT optimizations influence the execution of synchronized code.
+- How JIT optimizations influence the execution of java code.
 
 For detailed results and analysis, refer to the full Master's Thesis linked below.
 
